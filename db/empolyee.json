@@ -1,0 +1,285 @@
+{
+    "users": [
+      {
+        "username": "budi_santoso",
+        "email": "budi.santoso@example.com",
+        "password": "password1",
+        "role": "employee",
+        "profile": {
+          "firstName": "Budi",
+          "lastName": "Santoso",
+          "address": "Jl. Raya No. 123",
+          "postalCode": "12345",
+          "phoneNumber": "+6281234567890",
+          "imageUrl": "https://example.com/budi_santoso.jpg"
+        }
+      },
+      {
+        "username": "siti_wulandari",
+        "email": "siti.wulandari@example.com",
+        "password": "password2",
+        "role": "employee",
+        "profile": {
+          "firstName": "Siti",
+          "lastName": "Wulandari",
+          "address": "Jl. Melati No. 456",
+          "postalCode": "67890",
+          "phoneNumber": "+6282345678901",
+          "imageUrl": "https://example.com/siti_wulandari.jpg"
+        }
+      },
+      {
+        "username": "joko_putra",
+        "email": "joko.putra@example.com",
+        "password": "password3",
+        "role": "employee",
+        "profile": {
+          "firstName": "Joko",
+          "lastName": "Putra",
+          "address": "Jl. Anggrek No. 789",
+          "postalCode": "23456",
+          "phoneNumber": "+6283456789012",
+          "imageUrl": "https://example.com/joko_putra.jpg"
+        }
+      },
+      {
+        "username": "lina_mulyani",
+        "email": "lina.mulyani@example.com",
+        "password": "password4",
+        "role": "employee",
+        "profile": {
+          "firstName": "Lina",
+          "lastName": "Mulyani",
+          "address": "Jl. Mawar No. 1011",
+          "postalCode": "34567",
+          "phoneNumber": "+6284567890123",
+          "imageUrl": "https://example.com/lina_mulyani.jpg"
+        }
+      },
+      {
+        "username": "agus_hidayat",
+        "email": "agus.hidayat@example.com",
+        "password": "password5",
+        "role": "employee",
+        "profile": {
+          "firstName": "Agus",
+          "lastName": "Hidayat",
+          "address": "Jl. Kenanga No. 1213",
+          "postalCode": "45678",
+          "phoneNumber": "+6285678901234",
+          "imageUrl": "https://example.com/agus_hidayat.jpg"
+        }
+      },
+      {
+        "username": "novi_kusuma",
+        "email": "novi.kusuma@example.com",
+        "password": "password6",
+        "role": "employee",
+        "profile": {
+          "firstName": "Novi",
+          "lastName": "Kusuma",
+          "address": "Jl. Angin No. 1415",
+          "postalCode": "56789",
+          "phoneNumber": "+6286789012345",
+          "imageUrl": "https://example.com/novi_kusuma.jpg"
+        }
+      },
+      {
+        "username": "dewi_wijaya",
+        "email": "dewi.wijaya@example.com",
+        "password": "password7",
+        "role": "employee",
+        "profile": {
+          "firstName": "Dewi",
+          "lastName": "Wijaya",
+          "address": "Jl. Teratai No. 1617",
+          "postalCode": "67890",
+          "phoneNumber": "+6287890123456",
+          "imageUrl": "https://example.com/dewi_wijaya.jpg"
+        }
+      },
+      {
+        "username": "eko_prasetyo",
+        "email": "eko.prasetyo@example.com",
+        "password": "password8",
+        "role": "employee",
+        "profile": {
+          "firstName": "Eko",
+          "lastName": "Prasetyo",
+          "address": "Jl. Melati No. 1819",
+          "postalCode": "78901",
+          "phoneNumber": "+6288901234567",
+          "imageUrl": "https://example.com/eko_prasetyo.jpg"
+        }
+      },
+      {
+        "username": "nita_apriliani",
+        "email": "nita.apriliani@example.com",
+        "password": "password9",
+        "role": "employee",
+        "profile": {
+          "firstName": "Nita",
+          "lastName": "Apriliani",
+          "address": "Jl. Kembang No. 2021",
+          "postalCode": "89012",
+          "phoneNumber": "+6289012345678",
+          "imageUrl": "https://example.com/nita_apriliani.jpg"
+        }
+      },
+      {
+        "username": "dodi_nugroho",
+        "email": "dodi.nugroho@example.com",
+        "password": "password10",
+        "role": "employee",
+        "profile": {
+          "firstName": "Dodi",
+          "lastName": "Nugroho",
+          "address": "Jl. Cempaka No. 2223",
+          "postalCode": "90123",
+          "phoneNumber": "+6280123456789",
+          "imageUrl": "https://example.com/dodi_nugroho.jpg"
+        }
+      },
+      {
+        "username": "siska_indah",
+        "email": "siska.indah@example.com",
+        "password": "password11",
+        "role": "employee",
+        "profile": {
+          "firstName": "Siska",
+          "lastName": "Indah",
+          "address": "Jl. Sakura No. 2425",
+          "postalCode": "12345",
+          "phoneNumber": "+6281234567890",
+          "imageUrl": "https://example.com/siska_indah.jpg"
+        }
+      },
+      {
+        "username": "ferdi_jaya",
+        "email": "ferdi.jaya@example.com",
+        "password": "password12",
+        "role": "employee",
+        "profile": {
+          "firstName": "Ferdi",
+          "lastName": "Jaya",
+          "address": "Jl. Flamboyan No. 2627",
+          "postalCode": "23456",
+          "phoneNumber": "+6282345678901",
+          "imageUrl": "https://example.com/ferdi_jaya.jpg"
+        }
+      },
+      {
+        "username": "nina_putri",
+        "email": "nina.putri@example.com",
+        "password": "password13",
+        "role": "employee",
+        "profile": {
+          "firstName": "Nina",
+          "lastName": "Putri",
+          "address": "Jl. Mawar No. 2829",
+          "postalCode": "34567",
+          "phoneNumber": "+6283456789012",
+          "imageUrl": "https://example.com/nina_putri.jpg"
+        }
+      },
+      {
+        "username": "rama_saputra",
+        "email": "rama.saputra@example.com",
+        "password": "password14",
+        "role": "employee",
+        "profile": {
+          "firstName": "Rama",
+          "lastName": "Saputra",
+          "address": "Jl. Anggrek No. 3031",
+          "postalCode": "45678",
+          "phoneNumber": "+6284567890123",
+          "imageUrl": "https://example.com/rama_saputra.jpg"
+        }
+      },
+      {
+        "username": "rita_mulyati",
+        "email": "rita.mulyati@example.com",
+        "password": "password15",
+        "role": "employee",
+        "profile": {
+          "firstName": "Rita",
+          "lastName": "Mulyati",
+          "address": "Jl. Kenanga No. 3233",
+          "postalCode": "56789",
+          "phoneNumber": "+6285678901234",
+          "imageUrl": "https://example.com/rita_mulyati.jpg"
+        }
+      },
+      {
+        "username": "yoga_susilo",
+        "email": "yoga.susilo@example.com",
+        "password": "password16",
+        "role": "employee",
+        "profile": {
+          "firstName": "Yoga",
+          "lastName": "Susilo",
+          "address": "Jl. Teratai No. 3435",
+          "postalCode": "67890",
+          "phoneNumber": "+6286789012345",
+          "imageUrl": "https://example.com/yoga_susilo.jpg"
+        }
+      },
+      {
+        "username": "dina_puspita",
+        "email": "dina.puspita@example.com",
+        "password": "password17",
+        "role": "employee",
+        "profile": {
+          "firstName": "Dina",
+          "lastName": "Puspita",
+          "address": "Jl. Melati No. 3637",
+          "postalCode": "78901",
+          "phoneNumber": "+6287890123456",
+          "imageUrl": "https://example.com/dina_puspita.jpg"
+        }
+      },
+      {
+        "username": "hendro_wijaya",
+        "email": "hendro.wijaya@example.com",
+        "password": "password18",
+        "role": "employee",
+        "profile": {
+          "firstName": "Hendro",
+          "lastName": "Wijaya",
+          "address": "Jl. Kembang No. 3839",
+          "postalCode": "89012",
+          "phoneNumber": "+6289012345678",
+          "imageUrl": "https://example.com/hendro_wijaya.jpg"
+        }
+      },
+      {
+        "username": "lisa_setiawan",
+        "email": "lisa.setiawan@example.com",
+        "password": "password19",
+        "role": "employee",
+        "profile": {
+          "firstName": "Lisa",
+          "lastName": "Setiawan",
+          "address": "Jl. Cempaka No. 4041",
+          "postalCode": "90123",
+          "phoneNumber": "+6280123456789",
+          "imageUrl": "https://example.com/lisa_setiawan.jpg"
+        }
+      },
+      {
+        "username": "dian_surya",
+        "email": "dian.surya@example.com",
+        "password": "password20",
+        "role": "employee",
+        "profile": {
+          "firstName": "Dian",
+          "lastName": "Surya",
+          "address": "Jl. Angin No. 4243",
+          "postalCode": "12345",
+          "phoneNumber": "+6281234567890",
+          "imageUrl": "https://example.com/dian_surya.jpg"
+        }
+      }
+    ]
+  }
+  

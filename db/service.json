@@ -1,0 +1,89 @@
+{
+    "services": [
+      {
+        "Service": "Full Clean Service",
+        "Price": "$50",
+        "ImageUrl": "https://example.com/full_clean_service.jpg",
+        "Description": "Our Full Clean Service includes thorough cleaning of all rooms, dusting, vacuuming, mopping, and sanitizing surfaces."
+      },
+      {
+        "Service": "Sweeping",
+        "Price": "$20",
+        "ImageUrl": "https://example.com/sweeping.jpg",
+        "Description": "Our Sweeping service involves sweeping all floors to remove dirt, dust, and debris, leaving your floors clean and tidy."
+      },
+      {
+        "Service": "Mopping",
+        "Price": "$25",
+        "ImageUrl": "https://example.com/mopping.jpg",
+        "Description": "Our Mopping service includes mopping all hard floors to remove stains, spills, and sticky residue, resulting in a fresh and clean surface."
+      },
+      {
+        "Service": "Dishwashing",
+        "Price": "$30",
+        "ImageUrl": "https://example.com/dishwashing.jpg",
+        "Description": "Our Dishwashing service includes washing and drying dishes, pots, and pans, leaving your kitchen utensils sparkling clean."
+      },
+      {
+        "Service": "Window Cleaning",
+        "Price": "$35",
+        "ImageUrl": "https://example.com/window_cleaning.jpg",
+        "Description": "Our Window Cleaning service involves cleaning windows, frames, and sills, providing you with crystal-clear views."
+      },
+      {
+        "Service": "Laundry Service",
+        "Price": "$40",
+        "ImageUrl": "https://example.com/laundry_service.jpg",
+        "Description": "Our Laundry Service includes washing, drying, and folding clothes, ensuring your laundry is fresh and neatly organized."
+      },
+      {
+        "Service": "Carpet Cleaning",
+        "Price": "$45",
+        "ImageUrl": "https://example.com/carpet_cleaning.jpg",
+        "Description": "Our Carpet Cleaning service removes dirt, stains, and odors from carpets, leaving them soft, fresh, and renewed."
+      },
+      {
+        "Service": "Deep Cleaning",
+        "Price": "$60",
+        "ImageUrl": "https://example.com/deep_cleaning.jpg",
+        "Description": "Our Deep Cleaning service provides thorough cleaning of all surfaces, including hard-to-reach areas, ensuring a spotless and sanitized environment."
+      },
+      {
+        "Service": "Bathroom Cleaning",
+        "Price": "$30",
+        "ImageUrl": "https://example.com/bathroom_cleaning.jpg",
+        "Description": "Our Bathroom Cleaning service ensures a hygienic and sparkling clean bathroom, including scrubbing tiles, cleaning fixtures, and sanitizing surfaces."
+      },
+      {
+        "Service": "Kitchen Cleaning",
+        "Price": "$35",
+        "ImageUrl": "https://example.com/kitchen_cleaning.jpg",
+        "Description": "Our Kitchen Cleaning service involves thorough cleaning of kitchen surfaces, appliances, and cabinets, ensuring a clean and sanitized cooking area."
+      },
+      {
+        "Service": "Bedroom Cleaning",
+        "Price": "$30",
+        "ImageUrl": "https://example.com/bedroom_cleaning.jpg",
+        "Description": "Our Bedroom Cleaning service includes dusting furniture, vacuuming carpets, changing bed linens, and tidying up, creating a cozy and relaxing atmosphere."
+      },
+      {
+        "Service": "Office Cleaning",
+        "Price": "$50",
+        "ImageUrl": "https://example.com/office_cleaning.jpg",
+        "Description": "Our Office Cleaning service provides a clean and organized workspace, including dusting, vacuuming, sanitizing surfaces, and emptying trash bins."
+      },
+      {
+        "Service": "Pet Cleaning",
+        "Price": "$25",
+        "ImageUrl": "https://example.com/pet_cleaning.jpg",
+        "Description": "Our Pet Cleaning service involves bathing and grooming pets, cleaning litter boxes, and removing pet hair from furniture, ensuring a clean and hygienic living environment for your furry friends."
+      },
+      {
+        "Service": "Outdoor Cleaning",
+        "Price": "$40",
+        "ImageUrl": "https://example.com/outdoor_cleaning.jpg",
+        "Description": "Our Outdoor Cleaning service includes sweeping patios, cleaning outdoor furniture, removing debris, and tidying up outdoor spaces, ensuring a clean and inviting outdoor area."
+      }
+    ]
+  }
+  
