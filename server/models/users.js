@@ -1,5 +1,5 @@
 const db = require("../db/config/mongodbConnection");
-
+const bcrypt = require("bcrypt");
 class User {
   static async register(form) {
     try {
@@ -7,12 +7,13 @@ class User {
 
       let formRegister = {
         ...form,
+        password: bcrypt.hashSync(form.password, bcrypt.genSaltSync(8)),
         role: "user",
       };
 
-      const response = await db.collection("User").insertOne(formRegister);
+        const response = await db.collection("User").insertOne(formRegister);
 
-      console.log(response, "<<< ini response");
+      return response;
     } catch (error) {
       console.log(error);
     }
