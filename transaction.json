@@ -1,0 +1,63 @@
+[
+    {
+        "_id": "203nek1lel",
+        "userId": 1,
+        "booking": [
+          {
+            "_id": 1,
+            "userId": 1,
+            "services": {
+              "Service": "Full Clean Service",
+              "price": 20,
+              "imageUrl": "seifneof",
+              "description": "woefnwpeifkwoeifj",
+              "schedule": {
+                "startTime": "selasa",
+                "endTime": "rabu"
+              }
+            },
+            "employee": [
+              {
+                "username": "budi",
+                "email": "budi@mail.com",
+                "role": "employee"
+              },
+              {
+                "username": "agus",
+                "email": "agus@mail.com",
+                "role": "employee"
+              }
+            ],
+            "totalPrice": 50000
+          },
+            {
+              "_id": 2,
+              "userId": 1,
+              "services": {
+                "Service": "Sweeping",
+                "price": 20,
+                "imageUrl": "seifneof",
+                "description": "woefnwpeifkwoeifj",
+                "schedule": {
+                  "startTime": "senin",
+                  "endTime": "selasa"
+                }
+              },
+              "employee": [
+                {
+                  "username": "budi",
+                  "email": "budi@mail.com",
+                  "role": "employee"
+                },
+                {
+                  "username": "agus",
+                  "email": "agus@mail.com",
+                  "role": "employee"
+                }
+              ],
+              "totalPrice": 20000
+            }
+        ],
+        "totalPrice": 70000
+    }
+]
