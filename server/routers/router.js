@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require("../db/config/mongodbConnection");
 const UserController = require("../controllers/userController");
 
-router.get("/register", UserController.register);
+router.post("/register", UserController.register);
+router.post("/login", UserController.login);
 
 module.exports = router;
