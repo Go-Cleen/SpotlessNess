@@ -11,7 +11,7 @@ router.post("/login", UserController.login);
 
 router.use(authentication);
 
-router.put("/change-password", authentication, UserController.changePassword)
+router.put("/change-password", UserController.changePassword)
 router.get("/profile", ProfileController.getProfile);
 router.post("/profile", ProfileController.postProfile);
 
