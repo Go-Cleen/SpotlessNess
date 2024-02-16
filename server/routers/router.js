@@ -6,8 +6,10 @@ const authentication = require("../middlewares/authentication");
 
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
-router.get("/", authentication, (req, res) => {
-  console.log(req.user, "<<< ini requser dari router");
-});
+
+router.use(authentication);
+
+router.get("/profile", UserController.getProfile);
+router.post("/profile", UserController.postProfile);
 
 module.exports = router;
