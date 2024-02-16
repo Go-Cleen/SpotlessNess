@@ -32,9 +32,20 @@ module.exports = class UserController {
         newPassword
       );
 
-      if(result.modifiedCount > 0) {
-        return res.status(200).json({message: "Password has been updated!"})
+      if (result.modifiedCount > 0) {
+        return res.status(200).json({ message: "Password has been updated!" });
       }
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getUser(req, res, next) {
+    try {
+      const userData = await db.collection("User").find().toArray();
+      console.log(userData, "<<< ini userdata");
+
+      res.status(200).json(userData);
     } catch (error) {
       next(error);
     }
