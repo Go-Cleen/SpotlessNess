@@ -7,7 +7,7 @@ class Profile {
     });
 
     if (validateProfile) {
-      throw { message: "Profile already exist!", status: 401 };
+      throw { error: "Profile already exist!", status: 401 };
     }
 
     const response = await db.collection("Profile").insertOne(data);
@@ -33,15 +33,15 @@ class Profile {
           },
         },
         {
-            $project: {
-                password: 0
-            }
+          $project: {
+            password: 0,
+          },
         },
       ])
       .toArray();
 
     if (userData.length < 1) {
-      throw { message: "User not found", status: 401 };
+      throw { error: "User not found", status: 401 };
     }
 
     return userData[0];

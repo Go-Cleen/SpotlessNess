@@ -6,7 +6,7 @@ module.exports = class UserController {
   static async register(req, res, next) {
     try {
       const register = await User.register(req.body);
-      res.status(201).json({ message: "User has been created!" });
+      res.status(201).json({ error: "User has been created!" });
     } catch (error) {
       next(error);
     }
@@ -21,32 +21,19 @@ module.exports = class UserController {
     }
   }
 
-  static async getProfile(req, res, next) {
+  static async changePassword(req, res, next) {
     try {
-      const result = await Profile.getUserProfile(req.user.email);
-      res.status(200).json(result);
-    } catch (error) {
-      next(error);
-    }
-  }
+      const userData = req.user;
+      const newPassword = req.body.newPassword;
+      const oldPassword = req.body.oldPassword;
+      const result = await User.changePassword(
+        userData,
+        oldPassword,
+        newPassword
+      );
 
-  static async postProfile(req, res, next) {
-    try {
-      const userData = await db.collection("User").findOne({
-        email: req.user.email,
-      });
-
-      const data = {
-        ...req.body,
-        userId: userData._id,
-      };
-
-      const result = await Profile.createProfile(data);
-
-      if (result) {
-        return res
-          .status(201)
-          .json({ message: "Profile has been created successfully!" });
+      if(result.modifiedCount > 0) {
+        return res.status(200).json({message: "Password has been updated!"})
       }
     } catch (error) {
       next(error);
