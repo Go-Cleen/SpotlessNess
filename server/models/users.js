@@ -19,7 +19,7 @@ class User {
       })
       .toArray();
 
-    if (validateEmail) {
+    if (validateEmail.length > 0) {
       throw { message: "Email already registered", status: 401 };
     }
 
