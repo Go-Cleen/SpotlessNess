@@ -4,7 +4,6 @@ const db = require("../db/config/mongodbConnection");
 const UserController = require("../controllers/userController");
 const authentication = require("../middlewares/authentication");
 const ProfileController = require("../Controllers/profileController");
-const authorization = require("../middlewares/authorization");
 const ServiceController = require("../Controllers/serviceController");
 
 router.post("/register", UserController.register);
@@ -18,5 +17,6 @@ router.get("/profile", ProfileController.getProfile);
 router.post("/profile", ProfileController.postProfile);
 
 router.get('/services', ServiceController.getService)
+router.get('/services/:id', ServiceController.getServiceById)
 
 module.exports = router;

@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 
 const authentication = async (req, res, next) => {
   try {
-    console.log(req.headers)
     if (!req.headers.authorization) {
       throw { error: "No Authentication", status: 403 };
     }
