@@ -1,6 +1,5 @@
 {
   "users": [
-
     {
       "username": "budi_santoso",
       "email": "budi.santoso@example.com",
@@ -13,25 +12,9 @@
         "postalCode": "12345",
         "phoneNumber": "+6281234567890",
         "imageUrl": "https://example.com/budi_santoso.jpg"
-      },
-      "services": [
-        {
-          "Service": "Full Clean Service",
-          "Price": "$50",
-          "ImageUrl": "https://example.com/full_clean_service.jpg",
-          "Description": "Our Full Clean Service includes thorough cleaning of all rooms, dusting, vacuuming, mopping, and sanitizing surfaces."
-        },
-        {
-          "Service": "Sweeping",
-          "Price": "$20",
-          "ImageUrl": "https://example.com/sweeping.jpg",
-          "Description": "Our Sweeping service involves sweeping all floors to remove dirt, dust, and debris, leaving your floors clean and tidy."
-        }
-      ]
+      }
     }
   ],
-  
-
   "Transactions": {
     "services": [
       {
@@ -39,10 +22,6 @@
         "Price": "$50",
         "ImageUrl": "https://example.com/full_clean_service.jpg",
         "Description": "Our Full Clean Service includes thorough cleaning of all rooms, dusting, vacuuming, mopping, and sanitizing surfaces.",
-        "Schedules": {
-          "StartTime": "2024-03-14T09:00:00",
-          "EndTime": "2024-03-14T10:00:00"
-        },
         "Employee": [
           {
             "username": "budi_santoso",
@@ -56,17 +35,17 @@
             "password": "password3",
             "role": "employee"
           }
-        ]
+        ],
+        "Schedules": {
+          "StartTime": "2024-03-14T09:00:00",
+          "EndTime": "2024-03-14T10:00:00"
+        }
       },
       {
         "Service": "Sweeping",
         "Price": "$20",
         "ImageUrl": "https://example.com/sweeping.jpg",
         "Description": "Our Sweeping service involves sweeping all floors to remove dirt, dust, and debris, leaving your floors clean and tidy.",
-        "Scedules": {
-          "StartTime": "2024-03-14T09:00:00",
-          "EndTime": "2024-03-14T10:00:00"
-        },
         "Employee": [
           {
             "username": "budi_santoso",
@@ -80,9 +59,13 @@
             "password": "password3",
             "role": "employee"
           }
-        ]
+        ],
+        "Scedules": {
+          "StartTime": "2024-03-14T09:00:00",
+          "EndTime": "2024-03-14T10:00:00"
+        }
       }
-    ], 
+    ],
     "Payments": {
       "PaymentMethod": "BCA",
       "PaymentStatus": "Success",
@@ -97,6 +80,26 @@
         "role": "client"
       }
     ],
-    "TransactionsIdMidtrans" : ""
+    "TransactionsIdMidtrans": ""
+  },
+  "Schedules": {
+    "Service": "Full Clean Service",
+    "Price": "$50",
+    "ImageUrl": "https://example.com/full_clean_service.jpg",
+    "Description": "Our Full Clean Service includes thorough cleaning of all rooms, dusting, vacuuming, mopping, and sanitizing surfaces.",
+    "Employee": [
+      {
+        "username": "budi_santoso",
+        "email": "budi.santoso@example.com",
+        "password": "password1",
+        "role": "employee"
+      },
+      {
+        "username": "joko_putra",
+        "email": "joko.putra@example.com",
+        "password": "password3",
+        "role": "employee"
+      }
+    ]
   }
 }
