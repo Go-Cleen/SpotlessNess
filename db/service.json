@@ -4,13 +4,7 @@
         "Service": "Full Clean Service",
         "Price": "$50",
         "ImageUrl": "https://example.com/full_clean_service.jpg",
-        "Description": "Our Full Clean Service includes thorough cleaning of all rooms, dusting, vacuuming, mopping, and sanitizing surfaces.",
-        "Employees": [{
-          "username": "budi_santoso",
-          "email": "budi.santoso@example.com",
-          "password": "password1",
-          "role": "employee"
-        }]
+        "Description": "Our Full Clean Service includes thorough cleaning of all rooms, dusting, vacuuming, mopping, and sanitizing surfaces."
       },
       {
         "Service": "Sweeping",

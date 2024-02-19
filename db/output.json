@@ -67,7 +67,7 @@
       }
     ],
     "Payments": {
-      "PaymentMethod": "BCA",
+      "PaymentMethod": "Visa",
       "PaymentStatus": "Success",
       "Amount": "$70",
       "PaymentDate": "2024-03-10T10:00:00"
@@ -80,7 +80,8 @@
         "role": "client"
       }
     ],
-    "TransactionsIdMidtrans": ""
+    "TransactionsIdMidtrans": "",
+    "TransactionsTokenMidtrans": ""
   },
   "Schedules": {
     "Service": "Full Clean Service",
