@@ -1,9 +1,6 @@
 require("dotenv").config();
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const uri =
-  process.env.NODE_ENV === "test"
-    ? process.env.MONGO_URL_TESTING
-    : process.env.MONGO_URL;
+const uri = process.env.MONGO_URL;
     
 const client = new MongoClient(uri, {
   serverApi: {
@@ -13,6 +10,6 @@ const client = new MongoClient(uri, {
   },
 });
 
-const db = process.env.NODE_ENV === "test" ? client.db("FinalProject") : client.db("FinalProjectTest");
+const db = process.env.NODE_ENV === "test" ? client.db("FinalProjectTest") : client.db("FinalProject");
 
 module.exports = db
