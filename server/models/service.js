@@ -8,10 +8,9 @@ module.exports = class Service {
   }
 
   static async getServiceById(id) {
-    console.log(id, "<<< ini id dari model");
 
     const result = await db.collection("Service").findOne({
-      _id: new ObjectId(id),
+      _id: new ObjectId(String(id)),
     });
 
     if (result) {

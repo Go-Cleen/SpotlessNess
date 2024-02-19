@@ -53,10 +53,7 @@ class User {
       throw { error: "Email/Password is incorrect.", status: 401 };
     }
 
-    const validatePassword = bcrypt.compareSync(
-      form.password,
-      userData[0].password
-    );
+    const validatePassword = comparePassword(form.password, userData[0].password)
 
     if (!validatePassword) {
       throw { error: "Email/Password is incorrect.", status: 401 };
@@ -75,7 +72,6 @@ class User {
   }
 
   static async changePassword(userData, oldPassword, newPassword) {
-
     const validateUser = await db
       .collection("User")
       .findOne({ email: userData.email });
@@ -112,9 +108,10 @@ class User {
       }
     );
 
-    if(updatePassword.modifiedCount === 0) throw {error: "Failed to change password", status: 400}
-    
-    return updatePassword
+    if (updatePassword.modifiedCount === 0)
+      throw { error: "Failed to change password", status: 400 };
+
+    return updatePassword;
   }
 }
 
