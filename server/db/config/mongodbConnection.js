@@ -13,6 +13,6 @@ const client = new MongoClient(uri, {
   },
 });
 
-const db = client.db("FinalProject");
+const db = process.env.NODE_ENV === "test" ? client.db("FinalProject") : client.db("FinalProjectTest");
 
 module.exports = db
