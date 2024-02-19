@@ -30,7 +30,6 @@ module.exports = class ServiceController {
 
   static async getServiceById(req, res, next) {
     try {
-      console.log(req.params);
       const result = await Service.getServiceById(req.params.id);
 
       res.status(201).json(result);

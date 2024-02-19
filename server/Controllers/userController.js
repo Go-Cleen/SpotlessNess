@@ -6,7 +6,7 @@ module.exports = class UserController {
   static async register(req, res, next) {
     try {
       const register = await User.register(req.body);
-      res.status(201).json({ error: "User has been created!" });
+      res.status(201).json({ message: "User has been created!" });
     } catch (error) {
       next(error);
     }
