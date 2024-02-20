@@ -9,6 +9,7 @@ const ControllerTransaction = require("../Controllers/transactionController");
 
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
+router.post("/update-transaction", ControllerTransaction.updateStatus)
 // router.get("/testing", ServiceController.seeding);
 
 router.use(authentication);
@@ -21,6 +22,5 @@ router.get("/services", ServiceController.getService);
 router.get("/services/:id", ServiceController.getServiceById);
 
 router.post("/midtrans-payment", ControllerTransaction.InitiateMidTrans)
-router.post("update-transaction", ControllerTransaction.updateStatus)
 
 module.exports = router;
