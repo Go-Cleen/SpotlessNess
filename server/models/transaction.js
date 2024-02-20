@@ -4,7 +4,6 @@ const db = require("../db/config/mongodbConnection");
 
 module.exports = class Transaction {
   static async createTransaction(service, userInfo) {
-    console.log(userInfo, "<<< ini userInfo");
 
     const instanceData = service.map((el) => {
       return new ObjectId(String(el));
@@ -45,6 +44,10 @@ module.exports = class Transaction {
       customer_details: {
         email: userInfo.email,
         first_name: userInfo.username,
+      },
+      page_expiry: {
+        duration: 5,
+        unit: "minute",
       },
     };
 

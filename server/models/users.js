@@ -17,14 +17,14 @@ class User {
 
     if(!validateEmailFormat) throw {error: "Invalid email format", status: 400}
 
-    const validateEmail = await db
+    const checkEmail = await db
       .collection("User")
       .find({
         email: form.email,
       })
       .toArray();
 
-    if (validateEmail.length > 0) {
+    if (checkEmail.length > 0) {
       throw { error: "Email already registered", status: 401 };
     }
 
