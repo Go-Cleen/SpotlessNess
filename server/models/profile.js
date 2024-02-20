@@ -17,11 +17,14 @@ class Profile {
           }
         }
       )
+      return updateProfile
+    }
+    
+    if(!validateProfile) {
+      const response = await db.collection("Profile").insertOne(data);
+      return response;
     }
 
-    const response = await db.collection("Profile").insertOne(data);
-
-    return response;
   }
 
   static async getUserProfile(data) {
