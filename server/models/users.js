@@ -13,6 +13,10 @@ class User {
       };
     }
 
+    const validateEmailFormat = validateEmail(form.email)
+
+    if(!validateEmailFormat) throw {error: "Invalid email format", status: 400}
+
     const validateEmail = await db
       .collection("User")
       .find({
@@ -61,6 +65,7 @@ class User {
 
     const token = jwt.sign(
       {
+        id: userData[0]._id,
         email: userData[0].email,
         username: userData[0].username,
         role: userData[0].role,

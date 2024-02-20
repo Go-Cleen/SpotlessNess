@@ -1,13 +1,22 @@
 const db = require("../db/config/mongodbConnection");
 
 class Profile {
-  static async createProfile(data) {
+  static async patchProfile(data) {
     const validateProfile = await db.collection("Profile").findOne({
       userId: data.userId,
     });
 
-    if (validateProfile) {
-      throw { error: "Profile already exist!", status: 401 };
+    if (validateProfile && data) {
+      const updateProfile = await db.collection("Profile").updateOne(
+        {
+          userId: data.userId
+        },
+        {
+          $set: {
+            data
+          }
+        }
+      )
     }
 
     const response = await db.collection("Profile").insertOne(data);

@@ -5,6 +5,7 @@ const UserController = require("../controllers/userController");
 const authentication = require("../middlewares/authentication");
 const ProfileController = require("../Controllers/profileController");
 const ServiceController = require("../Controllers/serviceController");
+const ControllerTransaction = require("../Controllers/transactionController");
 
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
@@ -14,9 +15,12 @@ router.use(authentication);
 
 router.put("/change-password", UserController.changePassword);
 router.get("/profile", ProfileController.getProfile);
-router.post("/profile", ProfileController.postProfile);
+router.patch("/profile", ProfileController.patchProfile);
 
-router.get('/services', ServiceController.getService)
-router.get('/services/:id', ServiceController.getServiceById)
+router.get("/services", ServiceController.getService);
+router.get("/services/:id", ServiceController.getServiceById);
+
+router.post("/midtrans-payment", ControllerTransaction.InitiateMidTrans)
+router.post("update-transaction", ControllerTransaction.updateStatus)
 
 module.exports = router;

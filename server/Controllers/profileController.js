@@ -11,7 +11,7 @@ module.exports = class ProfileController {
     }
   }
 
-  static async postProfile(req, res, next) {
+  static async patchProfile(req, res, next) {
     try {
       const userData = await db.collection("User").findOne({
         email: req.user.email,
@@ -22,7 +22,7 @@ module.exports = class ProfileController {
         userId: userData._id,
       };
 
-      const result = await Profile.createProfile(data);
+      const result = await Profile.patchProfile(data);
 
       if (result) {
         return res
