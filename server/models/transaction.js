@@ -4,21 +4,35 @@ const db = require("../db/config/mongodbConnection");
 
 module.exports = class Transaction {
   static async createTransaction(service, userInfo) {
+    console.log(service, "<< ini service");
 
     const instanceData = service.map((el) => {
-      return new ObjectId(String(el));
+      return {
+        id: new ObjectId(String(el.id)),
+        date: el.date,
+        hour: el.hour
+      };
     });
 
     const serviceList = await db
       .collection("Service")
       .find({
-        _id: { $in: instanceData },
+        _id: { $in: [...new Set(instanceData.map((x) => x.id))] },
       })
       .toArray();
 
+    const resultServiceList = serviceList.map((data, idx) => {
+      return {
+        ...data,
+        date: instanceData[idx].date,
+        hour: instanceData[idx].hour,
+      };
+    });
+
+    // console.log(resultServiceList, "<<< ini result serviceList");
     let totalAmount = 0;
 
-    serviceList.forEach((el) => {
+    resultServiceList.forEach((el) => {
       totalAmount += el.Price;
     });
 
@@ -26,7 +40,7 @@ module.exports = class Transaction {
 
     const createTransaction = await db.collection("Transaction").insertOne({
       userId: new ObjectId(String(id)),
-      serviceList: serviceList,
+      serviceList: resultServiceList,
       status: "pending",
       amount: totalAmount,
       transactionDate: new Date(),

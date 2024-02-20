@@ -21,8 +21,6 @@ class ControllerTransaction {
   }
 
   static async updateStatus(req, res, next) {
-    console.log("masuk ke updatestatus webhooks");
-    console.log(req.body);
     try {
       if (
         req.body.transaction_status === "capture" &&
