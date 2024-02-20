@@ -13,13 +13,18 @@ class Profile {
         },
         {
           $set: {
-            data
+            firstName: data.firstName,
+            lastName: data.lastName,
+            address: data.address,
+            postalCode: data.postalCode,
+            phoneNumber: data.phoneNumber,
+            imageUrl: data.imageUrl
           }
         }
       )
       return updateProfile
     }
-    
+
     if(!validateProfile) {
       const response = await db.collection("Profile").insertOne(data);
       return response;
