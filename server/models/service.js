@@ -17,4 +17,24 @@ module.exports = class Service {
       return result;
     }
   }
+
+  static async addService(formData) {
+    const result = await db.collection("Service").insertOne({
+      formData
+    })
+
+    return result;
+  }
+
+  static async deleteService(id) {
+    const result = await db.collection("Service").deleteOne(
+      {
+        _id: new ObjectId(String(id))
+      }
+    )
+
+    if(!result) throw {error: "Service not found!", status: 400}
+
+    return result;
+  }
 };

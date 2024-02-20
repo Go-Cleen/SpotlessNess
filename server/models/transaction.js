@@ -4,13 +4,15 @@ const db = require("../db/config/mongodbConnection");
 
 module.exports = class Transaction {
   static async createTransaction(service, userInfo) {
-    console.log(service, "<< ini service");
+    if(service.length < 1) {
+      throw {error: "Service is required!", status: 400}
+    }
 
     const instanceData = service.map((el) => {
       return {
         id: new ObjectId(String(el.id)),
         date: el.date,
-        hour: el.hour
+        hour: el.hour,
       };
     });
 
@@ -60,8 +62,8 @@ module.exports = class Transaction {
         first_name: userInfo.username,
       },
       page_expiry: {
-        duration: 5,
-        unit: "minute",
+        duration: 1,
+        unit: "hour",
       },
     };
 
@@ -85,4 +87,36 @@ module.exports = class Transaction {
       orderId: createTransaction.insertedId,
     };
   }
+
+  static async getAllTransaction() {
+    const data = await db
+      .collection("Transaction")
+      .find()
+      .toArray();
+
+    return data;
+  }
+
+  static async getTransactionById(id) {
+    const data = await db.collection("Transaction").findOne(
+      {
+        _id: new ObjectId(String(id))
+      }
+    )
+
+    if(!data) throw {error: "Data not found", status: 400}
+
+    return data
+  }
+
+  static async getSuccessTransaction() {
+    const data = await db.collection("Transaction").find(
+      {
+        status: "success"
+      }
+    ).toArray()
+
+    return data;
+  }
+
 };
