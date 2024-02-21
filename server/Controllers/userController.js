@@ -40,14 +40,24 @@ module.exports = class UserController {
     }
   }
 
-  static async getUser(req, res, next) {
-    try {
-      const userData = await db.collection("User").find().toArray();
-      console.log(userData, "<<< ini userdata");
+  // static async getUser(req, res, next) {
+  //   try {
+  //     const userData = await db.collection("User").find().toArray();
+  //     console.log(userData, "<<< ini userdata");
 
-      res.status(200).json(userData);
+  //     res.status(200).json(userData);
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
+
+  static async getEmployee(req, res, next) {
+    try {
+      const result = await User.getEmployee();
+
+      res.status(200).json(result);
     } catch (error) {
-      next(error);
+      next(error)
     }
   }
 };

@@ -13,9 +13,10 @@ class User {
       };
     }
 
-    const validateEmailFormat = validateEmail(form.email)
+    const validateEmailFormat = validateEmail(form.email);
 
-    if(!validateEmailFormat) throw {error: "Invalid email format", status: 400}
+    if (!validateEmailFormat)
+      throw { error: "Invalid email format", status: 400 };
 
     const checkEmail = await db
       .collection("User")
@@ -57,7 +58,10 @@ class User {
       throw { error: "Email/Password is incorrect.", status: 401 };
     }
 
-    const validatePassword = comparePassword(form.password, userData[0].password)
+    const validatePassword = comparePassword(
+      form.password,
+      userData[0].password
+    );
 
     if (!validatePassword) {
       throw { error: "Email/Password is incorrect.", status: 401 };
@@ -117,6 +121,17 @@ class User {
       throw { error: "Failed to change password", status: 400 };
 
     return updatePassword;
+  }
+
+  static async getEmployee() {
+    const result = await db
+      .collection("User")
+      .find({
+        role: "employee",
+      })
+      .toArray();
+
+    return result;
   }
 }
 
