@@ -37,7 +37,7 @@ router.get("/get-schedule-user", ScheduleController.getScheduleByUser);
 router.get("/get-schedule/:id", ScheduleController.getScheduleById);
 
 cron.schedule(
-  "0 * * * *",
+  "*/1 * * * *",
   () => {
     updateStatus().catch((error) =>
       console.error("Error updating service status:", error)

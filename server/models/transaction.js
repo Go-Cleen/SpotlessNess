@@ -89,10 +89,17 @@ module.exports = class Transaction {
   }
 
   static async getAllTransaction() {
-    const data = await db
-      .collection("Transaction")
-      .find()
-      .toArray();
+    const data = await db.collection("Transaction").aggregate([
+      {
+        $lookup:
+          {
+            from: "User",
+            localField: "userId",
+            foreignField: "_id",
+            as: "userInfo",
+          },
+      },
+    ]).toArray();
 
     return data;
   }
