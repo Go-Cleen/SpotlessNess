@@ -133,6 +133,23 @@ class User {
 
     return result;
   }
+
+  static async addEmployee(form) {
+    const checkEmailFormat = form.email;
+
+    if(!checkEmailFormat) throw {error: "Invalid email format!", status: 400}
+
+    if(!form.username) throw {error: "Username required!", status: 400}
+
+    if(!form.password) throw {error: "Password required!", status: 400}
+
+    form.password = hashPassword(form.password);
+    form.role = "employee"
+
+    const result = await db.collection("User").insertOne(form);
+
+    return result;
+  }
 }
 
 module.exports = User;

@@ -8,6 +8,7 @@ const ServiceController = require("../Controllers/serviceController");
 const TransactionController = require("../Controllers/transactionController");
 const ScheduleController = require("../Controllers/scheduleController");
 const updateStatus = require("../helper/scheduleValidate");
+const authorization = require("../middlewares/authorization");
 
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
@@ -19,18 +20,23 @@ router.use(authentication);
 router.put("/change-password", UserController.changePassword);
 router.get("/profile", ProfileController.getProfile);
 router.patch("/profile", ProfileController.patchProfile);
+
 router.get("/employee", UserController.getEmployee);
+router.post("/employee", authorization, UserController.addEmployee);
 
 router.get("/services", ServiceController.getService);
 router.get("/services/:id", ServiceController.getServiceById);
 router.post("/services", ServiceController.addService);
-router.delete("/services/:id", ServiceController.deleteService)
+router.delete("/services/:id", ServiceController.deleteService);
 
 router.post("/midtrans-payment", TransactionController.InitiateMidTrans);
 
 router.get("/all-transaction", TransactionController.getAllTransaction);
 router.get("/get-transaction/:id", TransactionController.getTransactionById);
-router.get("/get-success-transaction", TransactionController.getSuccessTransaction)
+router.get(
+  "/get-success-transaction",
+  TransactionController.getSuccessTransaction
+);
 
 router.get("/all-schedule", ScheduleController.getAllSchedule);
 router.get("/get-schedule-user", ScheduleController.getScheduleByUser);

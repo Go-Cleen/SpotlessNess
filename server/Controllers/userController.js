@@ -60,4 +60,16 @@ module.exports = class UserController {
       next(error)
     }
   }
+
+  static async addEmployee(req, res, next) {
+    try {
+      const result = await User.addEmployee(req.body)
+
+      if(result) {
+        return res.status(201).json({message: "Employee has been added"})
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
 };
