@@ -14,6 +14,7 @@ async function updateStatus() {
         },
       }
     );
+    console.log(result, "<<< ini result update dokumen");
   } catch (error) {
     throw error;
   }
