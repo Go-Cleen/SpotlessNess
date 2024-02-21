@@ -27,7 +27,7 @@ module.exports = class ProfileController {
       if (result) {
         return res
           .status(201)
-          .json({ error: "Profile has been created successfully!" });
+          .json({ message: "Profile has been created successfully!" });
       }
     } catch (error) {
       next(error);

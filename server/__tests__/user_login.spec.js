@@ -1,6 +1,4 @@
-// Make me a mongodb test
-// Write a test for my login functionality
-// Import necessary modules for testing
+
 const request = require("supertest");
 const app = require("../app");
 const db = require("../db/config/mongodbConnection");

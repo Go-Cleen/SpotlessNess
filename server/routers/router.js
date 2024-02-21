@@ -10,21 +10,21 @@ const ScheduleController = require("../Controllers/scheduleController");
 const updateStatus = require("../helper/scheduleValidate");
 const authorization = require("../middlewares/authorization");
 
-router.post("/register", UserController.register);
-router.post("/login", UserController.login);
+router.post("/register", UserController.register); //done testing
+router.post("/login", UserController.login); //done testing
 router.post("/update-transaction", TransactionController.updateStatus);
 // router.get("/testing", ServiceController.seeding);
 
 router.use(authentication);
 
-router.put("/change-password", UserController.changePassword);
-router.get("/profile", ProfileController.getProfile);
-router.patch("/profile", ProfileController.patchProfile);
+router.put("/change-password", UserController.changePassword); //done testing
+router.get("/profile", ProfileController.getProfile); //done testing
+router.patch("/profile", ProfileController.patchProfile); //done testing
 
 router.get("/get-schedule-user", ScheduleController.getScheduleByUser);
 
-router.get("/services", ServiceController.getService);
-router.get("/services/:id", ServiceController.getServiceById);
+router.get("/services", ServiceController.getService); //done testing
+router.get("/services/:id", ServiceController.getServiceById); //done testing
 router.post("/services", ServiceController.addService);
 router.delete("/services/:id", ServiceController.deleteService);
 
