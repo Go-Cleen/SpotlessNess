@@ -57,16 +57,42 @@ module.exports = class UserController {
 
       res.status(200).json(result);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
   static async addEmployee(req, res, next) {
     try {
-      const result = await User.addEmployee(req.body)
+      const result = await User.addEmployee(req.body);
+
+      if (result) {
+        return res.status(201).json({ message: "Employee has been added" });
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getTokenResetPassword(req, res, next) {
+    try {
+      const result = await User.generateTokenResetPassword(req.body.email);
+
+      if (result.acknowledged) {
+        res.status(201).json({ message: `Reset token: ${result.insertedId}` });
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async resetPassword(req, res, next) {
+    try {
+      const token = req.params.token;
+      const newPassword = req.body.password
+      const result = await User.resetPassword(token, newPassword)
 
       if(result) {
-        return res.status(201).json({message: "Employee has been added"})
+        res.status(200).json({message: "Password has been changed successfully"})
       }
     } catch (error) {
       next(error);

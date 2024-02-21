@@ -1,11 +1,13 @@
 const snap = require("../db/config/midtransConnection");
 const { ObjectId } = require("mongodb");
 const db = require("../db/config/mongodbConnection");
+const sendMessage = require("../helper/nodemailerFunction");
+const fs = require("fs");
 
 module.exports = class Transaction {
   static async createTransaction(service, userInfo) {
-    if(service.length < 1) {
-      throw {error: "Service is required!", status: 400}
+    if (service.length < 1) {
+      throw { error: "Service is required!", status: 400 };
     }
 
     const instanceData = service.map((el) => {
@@ -31,7 +33,6 @@ module.exports = class Transaction {
       };
     });
 
-    // console.log(resultServiceList, "<<< ini result serviceList");
     let totalAmount = 0;
 
     resultServiceList.forEach((el) => {
@@ -40,12 +41,18 @@ module.exports = class Transaction {
 
     const { id } = userInfo;
 
+    const currentDate = new Date();
+
+    const expiredDate = new Date(currentDate);
+    expiredDate.setHours(currentDate.getHours() + 1);
+
     const createTransaction = await db.collection("Transaction").insertOne({
       userId: new ObjectId(String(id)),
       serviceList: resultServiceList,
       status: "pending",
       amount: totalAmount,
-      transactionDate: new Date(),
+      transactionDate: currentDate,
+      transactionExpired: expiredDate,
       transactionIdMidtrans: null,
     });
 
@@ -88,42 +95,102 @@ module.exports = class Transaction {
     };
   }
 
+  static async updateTransaction(body) {
+    if (
+      body.transaction_status === "capture" &&
+      body.fraud_status === "accept"
+    ) {
+      await db.collection("Transaction").updateOne(
+        {
+          _id: new ObjectId(String(body.order_id)),
+        },
+        {
+          $set: {
+            status: "success",
+            paidDate: new Date(),
+          },
+        }
+      );
+
+      const transactionData = await db.collection("Transaction").findOne({
+        _id: new ObjectId(String(body.order_id)),
+      });
+
+      const userData = await db.collection("User").findOne({
+        _id: transactionData.userId,
+      });
+
+      const emailTemplate = fs.readFileSync(
+        "../db/emailTemplate.html",
+        "utf-8"
+      );
+
+      const renderedEmail = emailTemplate
+        .replace("{{recipient_name}}", userData.username)
+        .replace("{{order_id}}", transactionData._id);
+
+      await sendMessage(renderedEmail, userData.email, 'Payment Invoice');
+
+      const scheduleList = transactionData.serviceList;
+
+      const resultSchedule = scheduleList.map((el) => {
+        let scheduleDate = new Date(`${el.date}T${el.hour}:00`);
+        return {
+          serviceId: el._id,
+          userId: transactionData.userId,
+          Service: el.Service,
+          Price: el.Price,
+          ImageUrl: el.ImageUrl,
+          Description: el.Description,
+          status: "Ongoing",
+          scheduleTime: scheduleDate,
+        };
+      });
+
+      await db.collection("Schedule").insertMany(resultSchedule);
+
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   static async getAllTransaction() {
-    const data = await db.collection("Transaction").aggregate([
-      {
-        $lookup:
-          {
+    const data = await db
+      .collection("Transaction")
+      .aggregate([
+        {
+          $lookup: {
             from: "User",
             localField: "userId",
             foreignField: "_id",
             as: "userInfo",
           },
-      },
-    ]).toArray();
+        },
+      ])
+      .toArray();
 
     return data;
   }
 
   static async getTransactionById(id) {
-    const data = await db.collection("Transaction").findOne(
-      {
-        _id: new ObjectId(String(id))
-      }
-    )
+    const data = await db.collection("Transaction").findOne({
+      _id: new ObjectId(String(id)),
+    });
 
-    if(!data) throw {error: "Data not found", status: 400}
-
-    return data
-  }
-
-  static async getSuccessTransaction() {
-    const data = await db.collection("Transaction").find(
-      {
-        status: "success"
-      }
-    ).toArray()
+    if (!data) throw { error: "Data not found", status: 400 };
 
     return data;
   }
 
+  static async getSuccessTransaction() {
+    const data = await db
+      .collection("Transaction")
+      .find({
+        status: "success",
+      })
+      .toArray();
+
+    return data;
+  }
 };

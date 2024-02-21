@@ -23,48 +23,14 @@ class TransactionController {
   static async updateStatus(req, res, next) {
     console.log(req.body);
     try {
-      if (
-        req.body.transaction_status === "capture" &&
-        req.body.fraud_status === "accept"
-      ) {
-        await db.collection("Transaction").updateOne(
-          {
-            _id: new ObjectId(String(req.body.order_id)),
-          },
-          {
-            $set: {
-              status: "success",
-              paidDate: new Date(),
-            },
-          }
-        );
+      const result = await Transaction.updateTransaction(req.body);
 
-        const transactionData = await db.collection("Transaction").findOne({
-          _id: new ObjectId(String(req.body.order_id)),
-        });
-
-        const scheduleList = transactionData.serviceList;
-
-        const resultSchedule = scheduleList.map((el) => {
-          let scheduleDate = new Date(`${el.date}T${el.hour}:00`);
-          return {
-            serviceId: el._id,
-            userId: transactionData.userId,
-            Service: el.Service,
-            Price: el.Price,
-            ImageUrl: el.ImageUrl,
-            Description: el.Description,
-            status: "Ongoing",
-            scheduleTime: scheduleDate,
-          };
-        });
-
-        await db.collection("Schedule").insertMany(resultSchedule);
-
+      if (result) {
         res.status(200).json({ message: "Payment success!" });
       } else {
         throw { error: "Payment failed!", status: 400 };
       }
+      
     } catch (error) {
       next(error);
     }

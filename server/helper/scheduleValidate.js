@@ -1,9 +1,11 @@
 const db = require("../db/config/mongodbConnection");
+const nodemailer = require("nodemailer");
 
 async function updateStatus() {
   try {
     const currentDate = new Date();
-    const result = await db.collection("Schedule").updateMany(
+
+    await db.collection("Schedule").updateMany(
       {
         scheduleTime: { $lt: currentDate },
         status: "Ongoing",
@@ -14,7 +16,31 @@ async function updateStatus() {
         },
       }
     );
-    console.log(result, "<<< ini result update dokumen");
+
+    await db.collection("Transaction").updateMany(
+      {
+        transactionExpired: { $lt: currentDate },
+        status: "pending",
+      },
+      {
+        $set: {
+          status: "expired",
+        },
+      }
+    );
+
+    await db.collection("ResetToken").updateMany(
+      {
+        expirationDate: {$lt : currentDate},
+        status: 'unclaimed'
+      },
+      {
+        $set: 
+        {
+          status: "expired"
+        }
+      }
+    )
   } catch (error) {
     throw error;
   }
