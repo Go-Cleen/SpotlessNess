@@ -28,6 +28,19 @@ async function updateStatus() {
         },
       }
     );
+
+    await db.collection("ResetToken").updateMany(
+      {
+        expirationDate: {$lt : currentDate},
+        status: 'unclaimed'
+      },
+      {
+        $set: 
+        {
+          status: "expired"
+        }
+      }
+    )
   } catch (error) {
     throw error;
   }

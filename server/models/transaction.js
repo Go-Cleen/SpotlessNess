@@ -1,7 +1,7 @@
 const snap = require("../db/config/midtransConnection");
 const { ObjectId } = require("mongodb");
 const db = require("../db/config/mongodbConnection");
-const nodemailer = require("nodemailer");
+const sendMessage = require("../helper/nodemailerFunction");
 const fs = require("fs");
 
 module.exports = class Transaction {
@@ -33,7 +33,6 @@ module.exports = class Transaction {
       };
     });
 
-    // console.log(resultServiceList, "<<< ini result serviceList");
     let totalAmount = 0;
 
     resultServiceList.forEach((el) => {
@@ -121,16 +120,6 @@ module.exports = class Transaction {
         _id: transactionData.userId,
       });
 
-      const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
-        secure: false, // Use TLS connection
-        auth: {
-          user: "yakashikii@gmail.com",
-          pass: "dmza qkxz sjcg wbyi", // Or 'your_regular_gmail_password' if using "Less Secure Apps" (not recommended)
-        },
-      });
-
       const emailTemplate = fs.readFileSync(
         "../db/emailTemplate.html",
         "utf-8"
@@ -140,20 +129,7 @@ module.exports = class Transaction {
         .replace("{{recipient_name}}", userData.username)
         .replace("{{order_id}}", transactionData._id);
 
-      const mailOptions = {
-        from: "yakashikii@gmail.com",
-        to: userData.email,
-        subject: "Payment Invoice",
-        html: renderedEmail,
-      };
-
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.error(error);
-        } else {
-          console.log("Email sent: " + info.response);
-        }
-      });
+      await sendMessage(renderedEmail, userData.email, 'Payment Invoice');
 
       const scheduleList = transactionData.serviceList;
 
