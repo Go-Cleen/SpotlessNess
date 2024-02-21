@@ -193,4 +193,15 @@ module.exports = class Transaction {
 
     return data;
   }
+
+  static async getSuccessTransactionUser(id) {
+    const data = await db
+      .collection("Transaction")
+      .find({
+        userId: new ObjectId(String(id)),
+      })
+      .toArray();
+
+    return data;
+  }
 };

@@ -45,6 +45,7 @@ router.get(
   "/get-success-transaction",
   TransactionController.getSuccessTransaction
 );
+router.get("/get-success-transaction-user/:id", TransactionController.getSuccessTransactionUser)
 router.get("/all-schedule", ScheduleController.getAllSchedule);
 router.get("/get-schedule/:id", ScheduleController.getScheduleById);
 

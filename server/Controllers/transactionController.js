@@ -67,6 +67,17 @@ class TransactionController {
       next(error);
     }
   }
+
+  static async getSuccessTransactionUser(req, res, next) {
+    try {
+      const { id } = req.params;
+      const result = await Transaction.getSuccessTransactionUser(id);
+
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = TransactionController;
