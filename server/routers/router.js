@@ -21,8 +21,7 @@ router.put("/change-password", UserController.changePassword);
 router.get("/profile", ProfileController.getProfile);
 router.patch("/profile", ProfileController.patchProfile);
 
-router.get("/employee", UserController.getEmployee);
-router.post("/employee", authorization, UserController.addEmployee);
+router.get("/get-schedule-user", ScheduleController.getScheduleByUser);
 
 router.get("/services", ServiceController.getService);
 router.get("/services/:id", ServiceController.getServiceById);
@@ -31,15 +30,14 @@ router.delete("/services/:id", ServiceController.deleteService);
 
 router.post("/midtrans-payment", TransactionController.InitiateMidTrans);
 
+router.use(authorization)
+
+router.get("/employee", UserController.getEmployee);
+router.post("/employee", UserController.addEmployee);
 router.get("/all-transaction", TransactionController.getAllTransaction);
 router.get("/get-transaction/:id", TransactionController.getTransactionById);
-router.get(
-  "/get-success-transaction",
-  TransactionController.getSuccessTransaction
-);
-
+router.get("/get-success-transaction", TransactionController.getSuccessTransaction);
 router.get("/all-schedule", ScheduleController.getAllSchedule);
-router.get("/get-schedule-user", ScheduleController.getScheduleByUser);
 router.get("/get-schedule/:id", ScheduleController.getScheduleById);
 
 cron.schedule(
