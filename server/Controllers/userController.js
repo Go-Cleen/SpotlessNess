@@ -74,12 +74,12 @@ module.exports = class UserController {
   }
 
   static async getTokenResetPassword(req, res, next) {
+    console.log(req.body);
+    console.log("masuk ke routingan");
     try {
       const result = await User.generateTokenResetPassword(req.body.email);
 
-      if (result.acknowledged) {
-        res.status(201).json({ message: `Reset token: ${result.insertedId}` });
-      }
+      res.status(201).json({ message: `Reset token: ${result.insertedId}` });
     } catch (error) {
       next(error);
     }
@@ -88,11 +88,13 @@ module.exports = class UserController {
   static async resetPassword(req, res, next) {
     try {
       const token = req.params.token;
-      const newPassword = req.body.password
-      const result = await User.resetPassword(token, newPassword)
+      const newPassword = req.body.password;
+      const result = await User.resetPassword(token, newPassword);
 
-      if(result) {
-        res.status(200).json({message: "Password has been changed successfully"})
+      if (result) {
+        res
+          .status(200)
+          .json({ message: "Password has been changed successfully" });
       }
     } catch (error) {
       next(error);

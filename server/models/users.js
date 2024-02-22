@@ -127,12 +127,23 @@ class User {
   }
 
   static async getEmployee() {
-    const result = await db
-      .collection("User")
-      .find({
-        role: "employee",
-      })
-      .toArray();
+    const result = await db.collection("User").aggregate([
+      {
+        $match:
+          {
+            role: "employee",
+          },
+      },
+      {
+        $lookup:
+          {
+            from: "Profile",
+            localField: "_id",
+            foreignField: "userId",
+            as: "employeeProfile",
+          },
+      },
+    ]).toArray();
 
     return result;
   }
