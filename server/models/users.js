@@ -9,6 +9,12 @@ const fs = require("fs");
 
 class User {
   static async register(form) {
+    const currentDate = new Date();
+    const futureDate = new Date(currentDate);
+    futureDate.setDate(currentDate.getDate() + 1);
+
+    console.log(form, "<<< ini form");
+
     if (form.password.length < 8) {
       throw {
         error: "Password must be at least 8 characters long",
@@ -36,9 +42,49 @@ class User {
       ...form,
       password: bcrypt.hashSync(form.password, bcrypt.genSaltSync(8)),
       role: "user",
+      status: "unverified",
     };
 
     const response = await db.collection("User").insertOne(formRegister);
+
+    console.log(response, "<<< ini response");
+
+    if (!response) throw { error: "Internal server error", status: 500 };
+
+    const verifyRegisterToken = await db.collection("VerifyToken").findOne({
+      userId: response.insertedId,
+      status: "unclaimed",
+    });
+
+    console.log(verifyRegisterToken, "<<< ini verifytoken");
+
+    if (verifyRegisterToken)
+      throw {
+        error: "Token already exist! please check your email!",
+        status: 400,
+      };
+
+    const addToken = await db.collection("VerifyToken").insertOne({
+      userId: response.insertedId,
+      userEmail: form.email,
+      status: "unclaimed",
+      expirationDate: futureDate,
+    });
+
+    console.log(addToken, "<<< ini addtoken");
+
+    const emailTemplate = fs.readFileSync("../db/verifyEmail.html", "utf-8");
+
+    const sendEmailTemplate = emailTemplate.replace(
+      "{{verify_link}}",
+      `http://localhost:5173/verify-email/${addToken.insertedId}`
+    );
+
+    await sendMessage(
+      sendEmailTemplate,
+      form.email,
+      "One more step to get yourself verified!"
+    );
 
     return response;
   }
@@ -50,21 +96,21 @@ class User {
       throw { error: "Invalid email format!", status: 401 };
     }
 
-    const userData = await db
-      .collection("User")
-      .find({
-        email: form.email,
-      })
-      .toArray();
+    const userData = await db.collection("User").findOne({
+      email: form.email,
+    });
 
-    if (userData.length === 0) {
+    if (!userData) {
       throw { error: "Email/Password is incorrect.", status: 401 };
     }
 
-    const validatePassword = comparePassword(
-      form.password,
-      userData[0].password
-    );
+    if (
+      (userData.status === "unverified" || !userData.status) &&
+      userData.role === "user"
+    )
+      throw { error: "Please verify your email!", status: 400 };
+
+    const validatePassword = comparePassword(form.password, userData.password);
 
     if (!validatePassword) {
       throw { error: "Email/Password is incorrect.", status: 401 };
@@ -72,10 +118,10 @@ class User {
 
     const token = jwt.sign(
       {
-        id: userData[0]._id,
-        email: userData[0].email,
-        username: userData[0].username,
-        role: userData[0].role,
+        id: userData._id,
+        email: userData.email,
+        username: userData.username,
+        role: userData.role,
       },
       process.env.HASH_SECRET
     );
@@ -127,23 +173,24 @@ class User {
   }
 
   static async getEmployee() {
-    const result = await db.collection("User").aggregate([
-      {
-        $match:
-          {
+    const result = await db
+      .collection("User")
+      .aggregate([
+        {
+          $match: {
             role: "employee",
           },
-      },
-      {
-        $lookup:
-          {
+        },
+        {
+          $lookup: {
             from: "Profile",
             localField: "_id",
             foreignField: "userId",
             as: "employeeProfile",
           },
-      },
-    ]).toArray();
+        },
+      ])
+      .toArray();
 
     return result;
   }
@@ -200,7 +247,7 @@ class User {
 
     const emailForSend = emailTemplate.replace(
       "{{link_resetpassword}}",
-      `https://testing.com/reset-password/${result.insertedId}`
+      `http://localhost:5173/resetPassword/${result.insertedId}`
     );
 
     await sendMessage(emailForSend, email, "Reset Password");
@@ -240,6 +287,46 @@ class User {
     );
 
     return true;
+  }
+
+  static async verifyEmail(token) {
+    const checkToken = await db.collection("VerifyToken").findOne({
+      _id: new ObjectId(String(token)),
+      status: "unclaimed",
+    });
+
+    if (!checkToken) throw { error: "Invalid Token!", status: 400 };
+
+    const checkUser = await db.collection("User").findOne({
+      email: checkToken.userEmail,
+      status: "unverified",
+    });
+
+    if (!checkUser) throw { error: "No unverified user found!", status: 400 };
+
+    const result = await db.collection("User").updateOne(
+      {
+        email: checkToken.userEmail,
+      },
+      {
+        $set: {
+          status: "verified",
+        },
+      }
+    );
+
+    const updateToken = await db.collection("VerifyToken").updateOne(
+      {
+        _id: new ObjectId(String(token)),
+        status: "unclaimed",
+      },
+      {
+        $set: {
+          status: "claimed",
+        },
+      }
+    );
+    return result;
   }
 }
 

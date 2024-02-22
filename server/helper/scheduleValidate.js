@@ -31,16 +31,27 @@ async function updateStatus() {
 
     await db.collection("ResetToken").updateMany(
       {
-        expirationDate: {$lt : currentDate},
-        status: 'unclaimed'
+        expirationDate: { $lt: currentDate },
+        status: "unclaimed",
       },
       {
-        $set: 
-        {
-          status: "expired"
-        }
+        $set: {
+          status: "expired",
+        },
       }
-    )
+    );
+
+    await db.collection("VerifyToken").updateMany(
+      {
+        expirationDate: { $lt: currentDate },
+        status: "unclaimed",
+      },
+      {
+        $set: {
+          status: "expired",
+        },
+      }
+    );
   } catch (error) {
     throw error;
   }

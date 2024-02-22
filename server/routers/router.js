@@ -16,6 +16,7 @@ router.post("/login", UserController.login); //done testing
 router.post("/update-transaction", TransactionController.updateStatus);
 router.post("/reset-password", UserController.getTokenResetPassword);
 router.patch("/reset-password/:token", UserController.resetPassword);
+router.patch("/verify-email/:token", UserController.verifyEmail);
 // router.get("/testing", ServiceController.seeding);
 
 router.use(authentication);

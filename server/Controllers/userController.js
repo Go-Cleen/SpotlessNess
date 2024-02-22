@@ -100,4 +100,16 @@ module.exports = class UserController {
       next(error);
     }
   }
+
+  static async verifyEmail(req, res, next) {
+    try {
+      const token = req.params.token;
+      console.log(token, "<< ini token dari controller");
+      const result = await User.verifyEmail(token);
+
+      res.status(200).json({ message: "User has been verified successfully!" });
+    } catch (error) {
+      next(error);
+    }
+  }
 };
