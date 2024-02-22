@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.28% </span>
+                <span class="strong">95.12% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>33/35</span>
+                <span class='fraction'>39/41</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.28% </span>
+                <span class="strong">95.12% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>33/35</span>
+                <span class='fraction'>39/41</span>
             </div>
         
             
@@ -121,7 +121,14 @@
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
@@ -131,19 +138,6 @@
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -151,6 +145,8 @@
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -158,6 +154,24 @@
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -190,10 +204,13 @@ const TransactionController = require("../Controllers/transactionController");
 const ScheduleController = require("../Controllers/scheduleController");
 const updateStatus = require("../helper/scheduleValidate");
 const authorization = require("../middlewares/authorization");
+const CartController = require("../Controllers/cartController");
 &nbsp;
 router.post("/register", UserController.register); //done testing
 router.post("/login", UserController.login); //done testing
 router.post("/update-transaction", TransactionController.updateStatus);
+router.post("/reset-password", UserController.getTokenResetPassword);
+router.patch("/reset-password/:token", UserController.resetPassword);
 // router.get("/testing", ServiceController.seeding);
 &nbsp;
 router.use(authentication);
@@ -202,25 +219,29 @@ router.put("/change-password", UserController.changePassword); //done testing
 router.get("/profile", ProfileController.getProfile); //done testing
 router.patch("/profile", ProfileController.patchProfile); //done testing
 &nbsp;
-router.get("/employee", UserController.getEmployee); //done testing
-router.post("/employee", authorization, UserController.addEmployee);
+router.get("/get-schedule-user", ScheduleController.getScheduleByUser);
 &nbsp;
 router.get("/services", ServiceController.getService); //done testing
 router.get("/services/:id", ServiceController.getServiceById); //done testing
 router.post("/services", ServiceController.addService);
 router.delete("/services/:id", ServiceController.deleteService);
 &nbsp;
+router.post("/cart", CartController.getCart);
+&nbsp;
 router.post("/midtrans-payment", TransactionController.InitiateMidTrans);
 &nbsp;
+router.use(authorization);
+&nbsp;
+router.get("/employee", UserController.getEmployee);
+router.post("/employee", UserController.addEmployee);
 router.get("/all-transaction", TransactionController.getAllTransaction);
 router.get("/get-transaction/:id", TransactionController.getTransactionById);
 router.get(
   "/get-success-transaction",
   TransactionController.getSuccessTransaction
 );
-&nbsp;
+router.get("/get-success-transaction-user/:id", TransactionController.getSuccessTransactionUser)
 router.get("/all-schedule", ScheduleController.getAllSchedule);
-router.get("/get-schedule-user", ScheduleController.getScheduleByUser);
 router.get("/get-schedule/:id", ScheduleController.getScheduleById);
 &nbsp;
 cron.schedule(
@@ -244,7 +265,7 @@ module.exports = router;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-02-21T07:27:58.313Z
+                at 2024-02-22T03:04:56.897Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
