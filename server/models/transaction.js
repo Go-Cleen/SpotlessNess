@@ -167,6 +167,14 @@ module.exports = class Transaction {
             as: "userInfo",
           },
         },
+        {
+          $lookup: {
+            from: "Profile",
+            localField: "userId",
+            foreignField: "_id",
+            as: "userProfile",
+          },
+        }
       ])
       .toArray();
 
